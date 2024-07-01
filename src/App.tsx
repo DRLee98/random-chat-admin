@@ -1,3 +1,5 @@
+import TokenProvider from "./context/TokenContext";
+
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo";
 
@@ -8,11 +10,13 @@ import Router from "./router";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={lightTheme}>
-        <Router />
-      </ThemeProvider>
-    </ApolloProvider>
+    <TokenProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={lightTheme}>
+          <Router />
+        </ThemeProvider>
+      </ApolloProvider>
+    </TokenProvider>
   );
 }
 

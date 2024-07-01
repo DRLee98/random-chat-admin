@@ -1,11 +1,11 @@
-export const setToken = (token: string) => {
+export const setStorageToken = (token: string) => {
   return localStorage.setItem("random-chat-token", token);
 };
 
-export const getToken = () => {
+export const getStorageToken = () => {
   return localStorage.getItem("random-chat-token");
 };
 
-export const removeToken = () => {
+export const removeStorageToken = () => {
   return localStorage.removeItem("random-chat-token");
 };

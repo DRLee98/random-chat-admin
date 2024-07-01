@@ -4,14 +4,14 @@ import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
 import { onError } from "@apollo/client/link/error";
 
-import { getToken, removeToken } from "./utils/localStorage";
+import { getStorageToken, removeStorageToken } from "./utils/localStorage";
 
 const httpLink = createUploadLink({
   uri: process.env.REACT_APP_API_URL,
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = getToken();
+  const token = getStorageToken();
   return {
     headers: {
       ...headers,
@@ -21,26 +21,13 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-// const wsLink = new WebSocketLink({
-//   uri: process.env.WS_REACT_APP_API_URL,
-//   options: {
-//     reconnect: true,
-//     connectionParams: async () => {
-//       const token = getToken();
-//       return {
-//         authorization: token ? `Bearer ${token}` : "",
-//       };
-//     },
-//   },
-// });
-
 const errorLink = onError(
   ({ graphQLErrors, networkError, forward, operation }) => {
     if (graphQLErrors) {
       for (let err of graphQLErrors) {
         switch (err.extensions?.code) {
           case "UNAUTHENTICATED":
-            removeToken();
+            removeStorageToken();
 
             return forward(operation);
         }
@@ -52,18 +39,6 @@ const errorLink = onError(
     }
   },
 );
-
-// const splitLink = split(
-//   ({ query }) => {
-//     const definition = getMainDefinition(query);
-//     return (
-//       definition.kind === "OperationDefinition" &&
-//       definition.operation === "subscription"
-//     );
-//   },
-//   wsLink,
-//   authLink.concat(httpLink as unknown as ApolloLink),
-// );
 
 export const client = new ApolloClient({
   link: from([errorLink, authLink.concat(httpLink as unknown as ApolloLink)]),
