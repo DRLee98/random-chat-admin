@@ -6,7 +6,11 @@ import {
   useEffect,
   useState,
 } from "react";
-import { getStorageToken, setStorageToken } from "@/utils/localStorage";
+import {
+  getStorageToken,
+  removeStorageToken,
+  setStorageToken,
+} from "@/utils/localStorage";
 
 const TokenContenxt = createContext<
   [string | null, Dispatch<SetStateAction<string | null>>]
@@ -42,8 +46,12 @@ export const useGetToken = () => {
 export const useSetToken = () => {
   const [_, setToken] = useContext(TokenContenxt);
 
-  const setFn = (token: string) => {
-    setStorageToken(token);
+  const setFn = (token: string | null) => {
+    if (token) {
+      setStorageToken(token);
+    } else {
+      removeStorageToken();
+    }
     setToken(token);
   };
   return setFn;

@@ -18,6 +18,7 @@ export const NOTICE_LIST = graphql(`
         title
         pinned
         createdAt
+        updatedAt
       }
     }
   }
