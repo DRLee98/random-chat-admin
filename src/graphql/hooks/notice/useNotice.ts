@@ -1,5 +1,7 @@
 import { QueryHookOptions, useQuery } from "@apollo/client";
-import { graphql } from "@/graphql/__generated__";
+import { getFragmentData, graphql } from "@/graphql/__generated__";
+
+import { NOTICE_BASE } from "@/graphql/fragments/notice";
 
 import type {
   NoticeInput,
@@ -16,8 +18,10 @@ export const NOTICE = graphql(`
         id
         title
         content
+        category
         pinned
         createdAt
+        updatedAt
       }
     }
   }

@@ -1,5 +1,7 @@
 import { QueryHookOptions, useQuery } from "@apollo/client";
-import { graphql } from "@/graphql/__generated__";
+import { getFragmentData, graphql } from "@/graphql/__generated__";
+
+import { NOTICE_BASE } from "@/graphql/fragments/notice";
 
 import type {
   NoticeListInput,
@@ -14,11 +16,7 @@ export const NOTICE_LIST = graphql(`
       error
       hasNext
       noticeList {
-        id
-        title
-        pinned
-        createdAt
-        updatedAt
+        ...NoticeBase
       }
     }
   }
@@ -38,6 +36,9 @@ const useNoticeList = (
       variables: { input: input ?? {} },
     },
   );
+
+  const noticeList =
+    getFragmentData(NOTICE_BASE, data?.noticeList.noticeList) ?? [];
 
   const fetchMore = async () => {
     if (result.networkStatus !== 7) return;
@@ -69,7 +70,7 @@ const useNoticeList = (
   return {
     ...result,
     fetchMore,
-    noticeList: data?.noticeList.noticeList ?? [],
+    noticeList,
   };
 };
 

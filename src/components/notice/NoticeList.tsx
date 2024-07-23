@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import useNoticeList from "@/graphql/hooks/notice/useNoticeList";
 
 import InfiniteScroll from "../common/InfiniteScroll";
 import NoticeItem from "./NoticeItem";
 
 const NoticeList = () => {
-  const { noticeList, fetchMore } = useNoticeList();
+  const { noticeList, fetchMore, refetch } = useNoticeList();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <InfiniteScroll fetchMore={fetchMore}>

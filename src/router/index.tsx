@@ -5,6 +5,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "@/pages/login";
 import HomePage from "@/pages/home";
 import AccusationPage from "@/pages/accusation";
+import NewNoticePage from "@/pages/notice/new";
+import EditNoticePage from "@/pages/notice/edit";
 
 const Router = () => {
   const token = useGetToken();
@@ -15,8 +17,8 @@ const Router = () => {
         <>
           <Route caseSensitive path="/" element={<HomePage />} />
           <Route path="notice">
-            <Route path=":id" element={<div>notice id</div>} />
-            <Route path="create" element={<div>notice new</div>} />
+            <Route path=":id" element={<EditNoticePage />} />
+            <Route path="create" element={<NewNoticePage />} />
           </Route>
           <Route path="opinion">
             <Route path=":id" element={<div>opinion id</div>} />

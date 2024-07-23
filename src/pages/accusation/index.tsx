@@ -13,7 +13,7 @@ const AccusationPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { data, loading, error } = useViewAccusation({
+  const { data } = useViewAccusation({
     id: id ?? "",
     password: location.state.password,
   });

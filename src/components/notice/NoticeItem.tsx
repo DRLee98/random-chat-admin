@@ -5,11 +5,10 @@ import { AiFillPushpin } from "react-icons/ai";
 
 import { getDateString } from "@/utils/date";
 
-import type { NoticeListQuery } from "@/graphql/__generated__/graphql";
-import type { RequiredItem } from "types/utils";
+import type { NoticeBaseFragment } from "@/graphql/__generated__/graphql";
 
 interface NoticeItemProps {
-  notice: RequiredItem<NoticeListQuery["noticeList"], "noticeList">;
+  notice: NoticeBaseFragment;
 }
 
 const NoticeItem = ({ notice }: NoticeItemProps) => {

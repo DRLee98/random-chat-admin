@@ -2,13 +2,15 @@ import { InputHTMLAttributes, forwardRef } from "react";
 
 import styled from "styled-components";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface TextareaProps extends InputHTMLAttributes<HTMLTextAreaElement> {}
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  return <StyledInput {...props} ref={ref} />;
-});
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (props, ref) => {
+    return <StyledTextarea rows={5} {...props} ref={ref} />;
+  },
+);
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   width: 100%;
   padding: 10px;
 
@@ -20,4 +22,4 @@ const StyledInput = styled.input`
   }
 `;
 
-export default Input;
+export default Textarea;

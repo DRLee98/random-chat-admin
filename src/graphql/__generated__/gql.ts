@@ -14,18 +14,23 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  fragment CommentBase on CommentObjectType {\n    id\n    text\n    createdAt\n    updatedAt\n    user {\n      id\n      nickname\n      profileUrl\n      profileBgColor\n      profileTextColor\n    }\n  }\n": types.CommentBaseFragmentDoc,
+    "\n  fragment NoticeBase on NoticeObjectType {\n    id\n    title\n    category\n    pinned\n    createdAt\n    updatedAt\n  }\n": types.NoticeBaseFragmentDoc,
     "\n  fragment OpinionBase on OpinionObjectType {\n    id\n    title\n    content\n    imageUrls\n    category\n    status\n    createdAt\n    updatedAt\n  }\n": types.OpinionBaseFragmentDoc,
     "\n  fragment BlockUser on UserObjectType {\n    id\n    nickname\n    profileUrl\n    profileBgColor\n    profileTextColor\n    bio\n  }\n": types.BlockUserFragmentDoc,
     "\n  mutation updateAccusationStatus($input: UpdateAccusationStatusInput!) {\n    updateAccusationStatus(input: $input) {\n      ok\n      error\n    }\n  }\n": types.UpdateAccusationStatusDocument,
     "\n  query viewAccusation($input: ViewAccusationInput!) {\n    viewAccusation(input: $input) {\n      ok\n      error\n      accusation {\n        id\n        content\n        imageUrls\n        status\n        createdAt\n        updatedAt\n        info {\n          user {\n            id\n            nickname\n          }\n        }\n      }\n    }\n  }\n": types.ViewAccusationDocument,
     "\n  query viewAccusations($input: ViewAccusationsInput!) {\n    viewAccusations(input: $input) {\n      ok\n      error\n      hasNext\n      accusations {\n        id\n        content\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n": types.ViewAccusationsDocument,
+    "\n  query passwordCheck($input: PasswordCheckInput!) {\n    passwordCheck(input: $input) {\n      ok\n      error\n    }\n  }\n": types.PasswordCheckDocument,
     "\n  query commentCount($input: CommentCountInput!) {\n    commentCount(input: $input) {\n      ok\n      error\n      count\n    }\n  }\n": types.CommentCountDocument,
     "\n  mutation createComment($input: CreateCommentInput!) {\n    createComment(input: $input) {\n      ok\n      error\n      comment {\n        ...CommentBase\n      }\n    }\n  }\n": types.CreateCommentDocument,
     "\n  mutation deleteComment($input: DeleteCommentInput!) {\n    deleteComment(input: $input) {\n      ok\n      error\n    }\n  }\n": types.DeleteCommentDocument,
     "\n  mutation editComment($input: EditCommentInput!) {\n    editComment(input: $input) {\n      ok\n      error\n      comment {\n        ...CommentBase\n      }\n    }\n  }\n": types.EditCommentDocument,
     "\n  query viewComments($input: ViewCommentsInput!) {\n    viewComments(input: $input) {\n      ok\n      error\n      hasNext\n      comments {\n        ...CommentBase\n      }\n    }\n  }\n": types.ViewCommentsDocument,
-    "\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        pinned\n        createdAt\n      }\n    }\n  }\n": types.NoticeDocument,
-    "\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        id\n        title\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n": types.NoticeListDocument,
+    "\n  mutation createNotice($input: CreateNoticeInput!) {\n    createNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n": types.CreateNoticeDocument,
+    "\n  mutation deleteNotice($input: DeleteNoticeInput!) {\n    deleteNotice(input: $input) {\n      ok\n      error\n    }\n  }\n": types.DeleteNoticeDocument,
+    "\n  mutation editNotice($input: EditNoticeInput!) {\n    editNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n": types.EditNoticeDocument,
+    "\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        category\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n": types.NoticeDocument,
+    "\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        ...NoticeBase\n      }\n    }\n  }\n": types.NoticeListDocument,
     "\n  mutation createOpinion($input: CreateOpinionInput!) {\n    createOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n": types.CreateOpinionDocument,
     "\n  mutation deleteOpinion($input: DeleteOpinionInput!) {\n    deleteOpinion(input: $input) {\n      ok\n      error\n    }\n  }\n": types.DeleteOpinionDocument,
     "\n  mutation editOpinion($input: EditOpinionInput!) {\n    editOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n": types.EditOpinionDocument,
@@ -58,6 +63,10 @@ export function graphql(source: "\n  fragment CommentBase on CommentObjectType {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment NoticeBase on NoticeObjectType {\n    id\n    title\n    category\n    pinned\n    createdAt\n    updatedAt\n  }\n"): (typeof documents)["\n  fragment NoticeBase on NoticeObjectType {\n    id\n    title\n    category\n    pinned\n    createdAt\n    updatedAt\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment OpinionBase on OpinionObjectType {\n    id\n    title\n    content\n    imageUrls\n    category\n    status\n    createdAt\n    updatedAt\n  }\n"): (typeof documents)["\n  fragment OpinionBase on OpinionObjectType {\n    id\n    title\n    content\n    imageUrls\n    category\n    status\n    createdAt\n    updatedAt\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -75,6 +84,10 @@ export function graphql(source: "\n  query viewAccusation($input: ViewAccusation
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query viewAccusations($input: ViewAccusationsInput!) {\n    viewAccusations(input: $input) {\n      ok\n      error\n      hasNext\n      accusations {\n        id\n        content\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query viewAccusations($input: ViewAccusationsInput!) {\n    viewAccusations(input: $input) {\n      ok\n      error\n      hasNext\n      accusations {\n        id\n        content\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query passwordCheck($input: PasswordCheckInput!) {\n    passwordCheck(input: $input) {\n      ok\n      error\n    }\n  }\n"): (typeof documents)["\n  query passwordCheck($input: PasswordCheckInput!) {\n    passwordCheck(input: $input) {\n      ok\n      error\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -98,11 +111,23 @@ export function graphql(source: "\n  query viewComments($input: ViewCommentsInpu
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        pinned\n        createdAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        pinned\n        createdAt\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  mutation createNotice($input: CreateNoticeInput!) {\n    createNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createNotice($input: CreateNoticeInput!) {\n    createNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        id\n        title\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        id\n        title\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  mutation deleteNotice($input: DeleteNoticeInput!) {\n    deleteNotice(input: $input) {\n      ok\n      error\n    }\n  }\n"): (typeof documents)["\n  mutation deleteNotice($input: DeleteNoticeInput!) {\n    deleteNotice(input: $input) {\n      ok\n      error\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation editNotice($input: EditNoticeInput!) {\n    editNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation editNotice($input: EditNoticeInput!) {\n    editNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        category\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        category\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        ...NoticeBase\n      }\n    }\n  }\n"): (typeof documents)["\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        ...NoticeBase\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,4 +1,5 @@
 import TokenProvider from "./context/TokenContext";
+import PasswordProvider from "./context/PasswordContext";
 
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo";
@@ -15,11 +16,13 @@ function App() {
     <TokenProvider>
       <ApolloProvider client={client}>
         <ThemeProvider theme={lightTheme}>
-          <BrowserRouter>
-            <Layout>
-              <Router />
-            </Layout>
-          </BrowserRouter>
+          <PasswordProvider>
+            <BrowserRouter>
+              <Layout>
+                <Router />
+              </Layout>
+            </BrowserRouter>
+          </PasswordProvider>
         </ThemeProvider>
       </ApolloProvider>
     </TokenProvider>
