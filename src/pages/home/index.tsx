@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
 import NoticeList from "@/components/notice/NoticeList";
 import AccusationList from "@/components/accusation/AccusationList";
+import OpinionList from "@/components/opinion/OpinionList";
 
 const HomePage = () => {
   const theme = useTheme();
@@ -21,7 +22,7 @@ const HomePage = () => {
       </Section>
       <Section>
         <SectionTitle>의견</SectionTitle>
-        <div>의견 목록</div>
+        <OpinionList />
       </Section>
       <Section>
         <SectionTitle>신고</SectionTitle>

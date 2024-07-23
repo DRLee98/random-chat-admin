@@ -7,6 +7,7 @@ import HomePage from "@/pages/home";
 import AccusationPage from "@/pages/accusation";
 import NewNoticePage from "@/pages/notice/new";
 import EditNoticePage from "@/pages/notice/edit";
+import OpinionDetailPage from "@/pages/opinion/detail";
 
 const Router = () => {
   const token = useGetToken();
@@ -21,7 +22,7 @@ const Router = () => {
             <Route path="create" element={<NewNoticePage />} />
           </Route>
           <Route path="opinion">
-            <Route path=":id" element={<div>opinion id</div>} />
+            <Route path=":id" element={<OpinionDetailPage />} />
           </Route>
           <Route path="accusation">
             <Route path=":id" element={<AccusationPage />} />

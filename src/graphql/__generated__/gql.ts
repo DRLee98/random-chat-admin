@@ -31,11 +31,9 @@ const documents = {
     "\n  mutation editNotice($input: EditNoticeInput!) {\n    editNotice(input: $input) {\n      ok\n      error\n      notice {\n        ...NoticeBase\n      }\n    }\n  }\n": types.EditNoticeDocument,
     "\n  query notice($input: NoticeInput!) {\n    notice(input: $input) {\n      ok\n      error\n      notice {\n        id\n        title\n        content\n        category\n        pinned\n        createdAt\n        updatedAt\n      }\n    }\n  }\n": types.NoticeDocument,
     "\n  query noticeList($input: NoticeListInput!) {\n    noticeList(input: $input) {\n      ok\n      error\n      hasNext\n      noticeList {\n        ...NoticeBase\n      }\n    }\n  }\n": types.NoticeListDocument,
-    "\n  mutation createOpinion($input: CreateOpinionInput!) {\n    createOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n": types.CreateOpinionDocument,
-    "\n  mutation deleteOpinion($input: DeleteOpinionInput!) {\n    deleteOpinion(input: $input) {\n      ok\n      error\n    }\n  }\n": types.DeleteOpinionDocument,
-    "\n  mutation editOpinion($input: EditOpinionInput!) {\n    editOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n": types.EditOpinionDocument,
-    "\n  query myOpinions($input: MyOpinionsInput!) {\n    myOpinions(input: $input) {\n      ok\n      error\n      hasNext\n      opinions {\n        id\n        title\n        category\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n": types.MyOpinionsDocument,
     "\n  query opinionDetail($input: OpinionDetailInput!) {\n    opinionDetail(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n": types.OpinionDetailDocument,
+    "\n  mutation updateOpinionStatus($input: UpdateOpinionStatusInput!) {\n    updateOpinionStatus(input: $input) {\n      ok\n      error\n    }\n  }\n": types.UpdateOpinionStatusDocument,
+    "\n  query viewOpinions($input: ViewOpinionsInput!) {\n    viewOpinions(input: $input) {\n      ok\n      error\n      hasNext\n      opinions {\n        id\n        title\n        category\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n": types.ViewOpinionsDocument,
     "\n  query login($input: LoginInput!) {\n    login(input: $input) {\n      ok\n      error\n      token\n    }\n  }\n": types.LoginDocument,
     "\n  query me {\n    me {\n      ok\n      error\n      me {\n        id\n        nickname\n        profileUrl\n        profileBgColor\n        profileTextColor\n        blockUserIds\n      }\n    }\n  }\n": types.MeDocument,
     "\n  query meDetail {\n    meDetail {\n      ok\n      error\n      me {\n        id\n        nickname\n        profileUrl\n        profileBgColor\n        profileTextColor\n        bio\n        socialPlatform\n        noti\n        allowMessage\n        language\n        autoTranslation\n        blockUsers {\n          ...BlockUser\n        }\n      }\n    }\n  }\n": types.MeDetailDocument,
@@ -131,23 +129,15 @@ export function graphql(source: "\n  query noticeList($input: NoticeListInput!) 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createOpinion($input: CreateOpinionInput!) {\n    createOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createOpinion($input: CreateOpinionInput!) {\n    createOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation deleteOpinion($input: DeleteOpinionInput!) {\n    deleteOpinion(input: $input) {\n      ok\n      error\n    }\n  }\n"): (typeof documents)["\n  mutation deleteOpinion($input: DeleteOpinionInput!) {\n    deleteOpinion(input: $input) {\n      ok\n      error\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation editOpinion($input: EditOpinionInput!) {\n    editOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation editOpinion($input: EditOpinionInput!) {\n    editOpinion(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query myOpinions($input: MyOpinionsInput!) {\n    myOpinions(input: $input) {\n      ok\n      error\n      hasNext\n      opinions {\n        id\n        title\n        category\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query myOpinions($input: MyOpinionsInput!) {\n    myOpinions(input: $input) {\n      ok\n      error\n      hasNext\n      opinions {\n        id\n        title\n        category\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function graphql(source: "\n  query opinionDetail($input: OpinionDetailInput!) {\n    opinionDetail(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n"): (typeof documents)["\n  query opinionDetail($input: OpinionDetailInput!) {\n    opinionDetail(input: $input) {\n      ok\n      error\n      opinion {\n        ...OpinionBase\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateOpinionStatus($input: UpdateOpinionStatusInput!) {\n    updateOpinionStatus(input: $input) {\n      ok\n      error\n    }\n  }\n"): (typeof documents)["\n  mutation updateOpinionStatus($input: UpdateOpinionStatusInput!) {\n    updateOpinionStatus(input: $input) {\n      ok\n      error\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query viewOpinions($input: ViewOpinionsInput!) {\n    viewOpinions(input: $input) {\n      ok\n      error\n      hasNext\n      opinions {\n        id\n        title\n        category\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  query viewOpinions($input: ViewOpinionsInput!) {\n    viewOpinions(input: $input) {\n      ok\n      error\n      hasNext\n      opinions {\n        id\n        title\n        category\n        status\n        createdAt\n        updatedAt\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
